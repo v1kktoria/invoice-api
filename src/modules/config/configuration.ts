@@ -11,6 +11,7 @@ export interface EnvironmentVariables {
     password: string;
     name: string;
   };
+  taxRate:number;
 }
 
 const getEnvVar = (key: string): string => {
@@ -29,4 +30,5 @@ export default (): EnvironmentVariables => ({
     password: getEnvVar("DATABASE_PASSWORD"),
     name: getEnvVar("DATABASE_NAME"),
   },
+  taxRate: parseFloat(getEnvVar("TAX_RATE")),
 });
