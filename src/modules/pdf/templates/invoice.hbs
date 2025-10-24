@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice {{invoice.invoiceNumber}}</title>
+  <style>{{styles}}
+  </style>
+</head>
+
+<body>
+  <div class="header">Brick and Willow Design</div>
+
+  <div class="container">
+    <div class="invoice-title">
+      <h1>New Invoice</h1>
+    </div>
+
+    <hr class="divider" />
+
+    <table class="table">
+      <tr>
+        <td style="border-bottom:none;">
+          <strong>Invoice #{{invoice.invoiceNumber}}</strong><br>
+          {{invoice.date}}
+        </td>
+      </tr>
+      <tr>
+        <td style="border-bottom:none;">
+          <div><strong>Invoice To:</strong></div>
+          <div>{{invoice.clientName}} — {{invoice.clientEmail}}</div>
+          <div><strong>{{invoice.clientCompanyName}}</strong>, {{invoice.clientCompanyAddress}}</div>
+        </td>
+      </tr>
+    </table>
+
+    <hr class="divider" />
+    <p class="container">Thank you for your business. Services provided by Brick and Willow Design.</p>
+    <hr class="divider" />
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th class="price">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each invoice.items}}
+        <tr>
+          <td>{{description}}</td>
+          <td class="price">${{price}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <table class="summary">
+      <tr>
+        <td>Subtotal:</td>
+        <td class="price">${{invoice.subtotal}}</td>
+      </tr>
+      <tr>
+        <td>Tax:</td>
+        <td class="price">${{invoice.tax}}</td>
+      </tr>
+      <tr class="total-due">
+        <td>Total Due:</td>
+        <td class="price">${{invoice.grandTotal}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr class="divider" style="margin: 0;"/>
+
+  <footer class="footer">
+    <p>
+      <strong> Brick and Willow Design </strong><br>
+      101 Main Street, San Francisco, CA 94105<br>
+      415-555-4721
+    </p>
+  </footer>
+
+</body>
+
+</html>
