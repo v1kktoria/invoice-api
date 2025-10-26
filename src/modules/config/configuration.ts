@@ -12,6 +12,11 @@ export interface EnvironmentVariables {
     name: string;
   };
   taxRate:number;
+  mailersend: {
+    apiKey: string;
+    fromEmail: string;
+    fromName: string;
+  };
 }
 
 const getEnvVar = (key: string): string => {
@@ -31,4 +36,10 @@ export default (): EnvironmentVariables => ({
     name: getEnvVar("DATABASE_NAME"),
   },
   taxRate: parseFloat(getEnvVar("TAX_RATE")),
+  mailersend: {
+    apiKey: getEnvVar("MAIL_API_KEY"),
+    fromEmail: getEnvVar("MAIL_FROM_EMAIL"),
+    fromName: getEnvVar("MAIL_FROM_NAME"),
+  },
 });
+

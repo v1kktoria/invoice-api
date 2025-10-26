@@ -7,6 +7,7 @@ import { ClientModule } from './modules/client/client.module';
 import { CompanyModule } from './modules/company/company.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { PdfModule } from './modules/pdf/pdf.module';
+import { EmailModule } from './modules/email/email.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PdfModule } from './modules/pdf/pdf.module';
     CompanyModule,
     InvoiceModule,
     PdfModule,
+    EmailModule,
   ],
   controllers: [],
   providers: [],

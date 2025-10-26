@@ -20,7 +20,7 @@ export class PdfService {
 
       return await pdf.generatePdf(
         { content: html },
-        { format: "a4", printBackground: true }
+        { format: "A4", printBackground: true }
       );
     } catch (err) {
       throw new InternalServerErrorException("Failed to generate PDF");
