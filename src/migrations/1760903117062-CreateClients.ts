@@ -14,12 +14,12 @@ export class CreateClients1760903117062 implements MigrationInterface {
                     generationStrategy: "uuid"
                 },
                 {
-                    name: "firstName",
+                    name: "first_name",
                     type: "text",
                     isNullable: false
                 },
                 {
-                    name: "lastName",
+                    name: "last_name",
                     type: "text",
                     isNullable: false
                 },
@@ -35,7 +35,7 @@ export class CreateClients1760903117062 implements MigrationInterface {
                     isNullable: false
                 },
                 {
-                    name: "createdAt",
+                    name: "created_at",
                     type: "timestamptz",
                     default: "NOW()"
                 },

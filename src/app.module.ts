@@ -8,6 +8,8 @@ import { CompanyModule } from './modules/company/company.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { PdfModule } from './modules/pdf/pdf.module';
 import { EmailModule } from './modules/email/email.module';
+import { QueueModule } from './modules/queue/queue.module';
+import { ProcessorModule } from './modules/processor/processor.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { EmailModule } from './modules/email/email.module';
       inject: [TypedConfigService],
       useFactory: typeOrmConfig,
     }),
+    QueueModule,
+    ProcessorModule,
     ClientModule,
     CompanyModule,
     InvoiceModule,

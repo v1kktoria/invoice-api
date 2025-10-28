@@ -8,10 +8,10 @@ export class Client {
     id: string;
 
     @Column({ type: "text" })
-    firstName: string;
+    first_name: string;
 
     @Column({ type: "text" })
-    lastName: string;
+    last_name: string;
 
     @Column({ type: "text", unique: true })
     email: string;
@@ -24,5 +24,5 @@ export class Client {
     invoices: Invoice[];
 
     @CreateDateColumn({ type: "timestamptz" })
-    createdAt: Date;
+    created_at: Date;
 }

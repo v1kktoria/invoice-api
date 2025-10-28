@@ -17,6 +17,10 @@ export interface EnvironmentVariables {
     fromEmail: string;
     fromName: string;
   };
+  redis: {
+    host: string;
+    port: number;
+  };
 }
 
 const getEnvVar = (key: string): string => {
@@ -40,6 +44,10 @@ export default (): EnvironmentVariables => ({
     apiKey: getEnvVar("MAIL_API_KEY"),
     fromEmail: getEnvVar("MAIL_FROM_EMAIL"),
     fromName: getEnvVar("MAIL_FROM_NAME"),
+  },
+  redis: {
+    host: getEnvVar("REDIS_HOST"),
+    port: parseInt(getEnvVar("REDIS_PORT")),
   },
 });
 

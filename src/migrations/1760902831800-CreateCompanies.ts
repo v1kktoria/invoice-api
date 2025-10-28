@@ -24,7 +24,7 @@ export class CreateCompanies1760902831800 implements MigrationInterface {
                     isNullable: false
                 },
                 {
-                    name: "createdAt",
+                    name: "created_at",
                     type: "timestamptz",
                     default: "NOW()"
                 },

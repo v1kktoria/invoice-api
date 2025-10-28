@@ -9,7 +9,7 @@ export function mapInvoiceToPdfData(invoice: Invoice): PdfInvoiceData {
       month: "long",
       day: "numeric",
     }),
-    clientName: `${invoice.client.firstName} ${invoice.client.lastName}`,
+    clientName: `${invoice.client.first_name} ${invoice.client.last_name}`,
     clientEmail: invoice.client.email,
     clientCompanyName: invoice.client.company?.name || "",
     clientCompanyAddress: invoice.client.company?.address || "",

@@ -7,6 +7,8 @@ import { ClientService } from "../client/client.service";
 import { InvoiceResponseDto } from "./dto/invoice-response.dto";
 import { CreateInvoiceDto } from "./dto/create-invoice.dto";
 import { TypedConfigService } from "../config/typed.config.service";
+import { Queue } from "bullmq";
+import { InjectQueue } from "@nestjs/bullmq";
 
 @Injectable()
 export class InvoiceService {
@@ -14,6 +16,7 @@ export class InvoiceService {
         private readonly invoiceRepo: InvoiceRepository,
         private readonly clientService: ClientService,
         private readonly config: TypedConfigService,
+        @InjectQueue("pdfQueue") private readonly pdfQueue: Queue,
     ) { }
 
     async createInvoice(dto: CreateInvoiceDto): Promise<InvoiceResponseDto> {
@@ -32,6 +35,12 @@ export class InvoiceService {
             status: InvoiceStatus.QUEUED,
         });
 
+        await this.pdfQueue.add("generatePdf", { invoiceId: invoice.id }, {
+            jobId: invoice.id,
+            attempts: 3,
+            backoff: { type: "exponential", delay: 1000 },
+        });
+
         return plainToInstance(InvoiceResponseDto, { ...invoice, clientEmail: invoice.client?.email },
             { excludeExtraneousValues: true },
         );
@@ -44,6 +53,12 @@ export class InvoiceService {
         return plainToInstance(InvoiceResponseDto, { ...invoice, clientEmail: invoice.client?.email },
             { excludeExtraneousValues: true },
         );
+    }
+
+    async getInvoiceEntity(id: string) {
+        const invoice = await this.invoiceRepo.findById(id);
+        if (!invoice) throw new NotFoundException(`Invoice not found`);
+        return invoice;
     }
 
     async updateStatus(id: string, status: InvoiceStatus): Promise<void> {

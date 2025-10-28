@@ -16,5 +16,5 @@ export class Company {
     clients: Client[];
 
     @CreateDateColumn({ type: "timestamptz" })
-    createdAt: Date;
+    created_at: Date;
 }
