@@ -50,7 +50,7 @@ export class InvoiceService {
         const invoice = await this.invoiceRepo.findById(id);
         if (!invoice) throw new NotFoundException(`Invoice not found`);
 
-        return plainToInstance(InvoiceResponseDto, { ...invoice, clientEmail: invoice.client?.email },
+        return plainToInstance(InvoiceResponseDto, { ...invoice, clientEmail: invoice.client.email },
             { excludeExtraneousValues: true },
         );
     }
@@ -63,6 +63,11 @@ export class InvoiceService {
 
     async updateStatus(id: string, status: InvoiceStatus): Promise<void> {
         await this.invoiceRepo.updateStatus(id, status);
+    }
+
+    async deleteById(id: string): Promise<void> {
+        const deleted = await this.invoiceRepo.deleteById(id);
+        if (!deleted) throw new NotFoundException(`Invoice not found`);
     }
 
     private calculateTax(total: number): number {

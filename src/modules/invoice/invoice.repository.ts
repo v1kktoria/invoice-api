@@ -24,4 +24,9 @@ export class InvoiceRepository {
   async updateStatus(id: string, status: InvoiceStatus): Promise<void> {
     this.repo.update({ id }, { status });
   }
+
+  async deleteById(id: string): Promise<boolean> {
+    const result = await this.repo.delete(id);
+    return result.affected !== 0;
+  }
 }

@@ -10,6 +10,9 @@ import { PdfModule } from './modules/pdf/pdf.module';
 import { EmailModule } from './modules/email/email.module';
 import { QueueModule } from './modules/queue/queue.module';
 import { ProcessorModule } from './modules/processor/processor.module';
+import { createGlobalValidationPipe } from './config/validation.pipe';
+import { GlobalExceptionFilter } from './common/exceptions/global-exception.filter';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -28,6 +31,15 @@ import { ProcessorModule } from './modules/processor/processor.module';
     EmailModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useFactory: createGlobalValidationPipe,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

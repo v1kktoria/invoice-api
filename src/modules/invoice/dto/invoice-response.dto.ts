@@ -1,13 +1,6 @@
 import { Expose, Type } from "class-transformer";
 import { InvoiceStatus } from "../entities/invoice.entity";
-
-export class InvoiceItemResponseDto {
-  @Expose()
-  description: string;
-
-  @Expose()
-  price: number;
-}
+import { InvoiceItemDto } from "./invoice-item.dto";
 
 export class InvoiceResponseDto {
   @Expose()
@@ -26,10 +19,9 @@ export class InvoiceResponseDto {
   created_at: Date;
 
   @Expose()
-  @Type(() => String)
-  clientEmail?: string;
+  clientEmail: string;
 
   @Expose()
-  @Type(() => InvoiceItemResponseDto)
-  items: InvoiceItemResponseDto[];
+  @Type(() => InvoiceItemDto)
+  items: InvoiceItemDto[];
 }

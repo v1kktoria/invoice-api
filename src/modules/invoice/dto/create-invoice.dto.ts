@@ -1,20 +1,12 @@
-import { Expose, Type } from "class-transformer";
+import { Type } from "class-transformer";
 import { IsEmail, IsArray, ValidateNested } from "class-validator";
-
-export class InvoiceItemDto {
-  @IsArray()
-  @Expose()
-  description: string;
-
-  @Expose()
-  price: number;
-}
+import { InvoiceItemDto } from "./invoice-item.dto";
 
 export class CreateInvoiceDto {
-  @IsEmail()
+  @IsEmail({}, { message: "Email must be a valid email address" })
   email: string;
 
-  @IsArray()
+  @IsArray({ message: "Items must be provided as an array" })
   @ValidateNested({ each: true })
   @Type(() => InvoiceItemDto)
   items: InvoiceItemDto[];

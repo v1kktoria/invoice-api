@@ -5,6 +5,7 @@ import { ClientModule } from "../client/client.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Invoice } from "./entities/invoice.entity";
 import { QueueModule } from "../queue/queue.module";
+import { InvoiceController } from "./invoice.controller";
 
 @Module({
   imports: [
@@ -14,5 +15,6 @@ import { QueueModule } from "../queue/queue.module";
   ],
   providers: [InvoiceService, InvoiceRepository],
   exports: [InvoiceService],
+  controllers: [InvoiceController],
 })
 export class InvoiceModule {}

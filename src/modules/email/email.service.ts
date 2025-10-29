@@ -28,7 +28,7 @@ export class EmailService {
         .setText(`Hi ${toName}, please find your invoice attached.`)
         .setAttachments([
           {
-            content: pdfBuffer.toString("base64"),
+            content: Buffer.from(pdfBuffer).toString("base64"),
             filename: fileName,
             disposition: "attachment",
           },
